@@ -1,0 +1,22 @@
+BIN := ./bin
+INC := ./include
+SRC := ./src
+
+CXX    := g++ -std=c++11
+CFLAGS := -Wall -g
+
+ROOTCFLAGS  := $(shell root-config --cflags)
+ROOTLDFLAGS := $(shell root-config --ldflags)
+ROOTINCDIR  := $(shell root-config --incdir)
+ROOTLIBS    := $(shell root-config --libs) -lEG
+
+all: ${BIN}/acceptance ${BIN}/create-ntuples
+
+${BIN}/acceptance: ${SRC}/acceptance.cpp
+	${CXX} ${ROOTCFLAGS} ${SRC}/acceptance.cpp -I${INC} ${ROOTLIBS} -o ${BIN}/acceptance
+
+${BIN}/create-ntuples: ${SRC}/create-ntuples.cpp
+	${CXX} ${ROOTCFLAGS} ${SRC}/create-ntuples.cpp -I${INC} ${ROOTLIBS} -o ${BIN}/create-ntuples
+
+clean:
+	rm ${BIN}/*
