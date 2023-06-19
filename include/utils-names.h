@@ -28,9 +28,9 @@ std::string get_clt_file_name(int sim_target_index)
     return results_dir+"ct_"+sim_targets[sim_target_index]+"_ntuple.root";
 }
 
-std::string get_cltacc_file_name(int sim_target_index)
+std::string get_cltacc_file_name(int sim_target_index, int Q2_bin, int Nu_bin, int Zh_bin)
 {
-    return results_dir+"ctacc_"+sim_targets[sim_target_index]+".root";
+    return results_dir+"ctacc_"+sim_targets[sim_target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin)+".root";
 }
 
 std::string get_accf_histo_name(int vertex_cut_value, int dat_target_index, int Q2_bin, int Nu_bin, int Zh_bin, int Pt2_bin)
