@@ -10,7 +10,7 @@ ROOTLDFLAGS := $(shell root-config --ldflags)
 ROOTINCDIR  := $(shell root-config --incdir)
 ROOTLIBS    := $(shell root-config --libs) -lEG
 
-all: ${BIN}/acceptance ${BIN}/create-ntuples ${BIN}/integrate-phi-q2nuzhpt2
+all: ${BIN}/acceptance ${BIN}/create-ntuples ${BIN}/obtain-weights
 
 ${BIN}/acceptance: ${SRC}/acceptance.cpp
 	${CXX} ${ROOTCFLAGS} ${SRC}/acceptance.cpp -I${INC} ${ROOTLIBS} -o ${BIN}/acceptance
@@ -18,8 +18,8 @@ ${BIN}/acceptance: ${SRC}/acceptance.cpp
 ${BIN}/create-ntuples: ${SRC}/create-ntuples.cpp
 	${CXX} ${ROOTCFLAGS} ${SRC}/create-ntuples.cpp -I${INC} ${ROOTLIBS} -o ${BIN}/create-ntuples
 
-${BIN}/integrate-phi-q2nuzhpt2: ${SRC}/integrate-phi-q2nuzhpt2.cpp
-	${CXX} ${ROOTCFLAGS} ${SRC}/integrate-phi-q2nuzhpt2.cpp -I${INC} ${ROOTLIBS} -o ${BIN}/integrate-phi-q2nuzhpt2
+${BIN}/obtain-weights: ${SRC}/obtain-weights.cpp
+	${CXX} ${ROOTCFLAGS} ${SRC}/obtain-weights.cpp -I${INC} ${ROOTLIBS} -o ${BIN}/obtain-weights
 
 clean:
 	rm ${BIN}/*

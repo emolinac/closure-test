@@ -93,4 +93,14 @@ std::string get_acccorr_cleaninterpolated_Pt2_histo_name(int sim_target_index, i
     return get_acccorr_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin)+"_clean_interpolated";
 }
 
+std::string get_weights_name(int sim_target_index, int Q2_bin, int Nu_bin, int Zh_bin, int Pt2_bin)
+{
+    return "weights_"+sim_targets[sim_target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin)+std::to_string(Pt2_bin);
+}
+
+std::string get_weights_name(int sim_target_index, int Q2_bin, int Nu_bin, int Zh_bin)
+{
+    return "weights_"+sim_targets[sim_target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin);
+}
+
 #endif

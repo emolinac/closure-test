@@ -21,11 +21,14 @@ int main(int argc , char *argv[])
     // Integrate through all bins and targets
     TH1F* h_Phi_pdat;
     TH1F* h_Phi_ref;
-    TH1F* h_Pt2_pdat = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
-    TH1F* h_Pt2_ref  = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
+    TH1F* h_Phi_weights = new TH1F("","",N_Phi, Phi_min, Phi_max);
+
+    TH1F* h_Pt2_pdat    = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
+    TH1F* h_Pt2_ref     = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
+    TH1F* h_Pt2_weights = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
 
     fout->cd();
-    for(int sim_target_index = 0 ; sim_target_index < sizeof(sim_targets[4])/sizeof(std::string) ; sim_target_index++)
+    for(int sim_target_index = 0 ; sim_target_index < sizeof(sim_targets)/sizeof(std::string) ; sim_target_index++)
     {
         for(int Q2_bin = 0 ; Q2_bin < N_Q2 ; Q2_bin++)
         {
@@ -38,6 +41,13 @@ int main(int argc , char *argv[])
                         h_Phi_pdat = (TH1F*) fin->Get(get_acccorr_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
                         h_Phi_ref  = (TH1F*) fin->Get(get_thrown_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
                         if(h_Phi_pdat==NULL||h_Phi_ref==NULL) continue;
+
+                        //Obtain 5dim weight
+                        h_Phi_weights->Divide(h_Phi_pdat,h_Phi_ref,1,1);
+                        h_Phi_weights->Write(get_weights_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
+                        h_Phi_weights->Reset();
+
+                        // Proceed by integrating
                         phi_integration(h_Phi_pdat, h_Pt2_pdat, Pt2_bin);
                         phi_integration(h_Phi_ref , h_Pt2_ref , Pt2_bin);
                     }// End Pt2 loop
@@ -45,8 +55,13 @@ int main(int argc , char *argv[])
                     h_Pt2_pdat->Write(get_acccorr_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
                     h_Pt2_ref->Write(get_thrown_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
 
-                    h_Pt2_pdat->Reset(get_acccorr_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
-                    h_Pt2_ref->Reset(get_thrown_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
+                    //Obtain 4dim weight
+                    h_Pt2_weights->Divide(h_Pt2_pdat, h_Pt2_ref,1,1);
+                    h_Pt2_weights->Write(get_weights_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
+                    h_Pt2_weights->Reset();
+
+                    h_Pt2_pdat->Reset();
+                    h_Pt2_ref->Reset();
                 }// End Zh loop
             }// End Nu loop
         }// End Q2 loop
