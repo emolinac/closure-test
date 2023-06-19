@@ -1,5 +1,9 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include "TH1F.h"
 #include "TNtuple.h"
+#include "TSystem.h"
 #include "names.h"
 
 // MISC
@@ -135,3 +139,5 @@ void assign_n2p_ratio(double& NAZ, std::string target)
 
     return;
 }
+
+#endif

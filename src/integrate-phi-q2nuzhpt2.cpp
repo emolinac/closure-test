@@ -3,8 +3,9 @@
 #include "TFile.h"
 #include "TH1F.h"
 #include "integrals.h"
-#include "constants.h"
+#include "analysis-constants.h"
 #include "utils.h"
+#include "utils-names.h"
 
 int main(int argc , char *argv[])
 {
@@ -18,11 +19,13 @@ int main(int argc , char *argv[])
     gROOT->cd();
 
     // Integrate through all bins and targets
-    TH1F* h_Phi;
-    TH1F* h_Pt2 = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
+    TH1F* h_Phi_pdat;
+    TH1F* h_Phi_ref;
+    TH1F* h_Pt2_pdat = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
+    TH1F* h_Pt2_ref  = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
 
     fout->cd();
-    for(int targ = 0 ; targ < N_targets ; targ++)
+    for(int sim_target_index = 0 ; sim_target_index < sizeof(sim_targets[4])/sizeof(std::string) ; sim_target_index++)
     {
         for(int Q2_bin = 0 ; Q2_bin < N_Q2 ; Q2_bin++)
         {
@@ -32,13 +35,18 @@ int main(int argc , char *argv[])
                 {
                     for(int Pt2_bin = 0 ; Pt2_bin < N_Pt2 ; Pt2_bin++)
                     {
-                        h_Phi = (TH1F*) fin->Get(get_acccorr_Phi_histo_name(targ,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
-                        if(h_Phi==NULL) continue;
-                        phi_integration(h_Phi, h_Pt2, Pt2_bin);
+                        h_Phi_pdat = (TH1F*) fin->Get(get_acccorr_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
+                        h_Phi_ref  = (TH1F*) fin->Get(get_thrown_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
+                        if(h_Phi_pdat==NULL||h_Phi_ref==NULL) continue;
+                        phi_integration(h_Phi_pdat, h_Pt2_pdat, Pt2_bin);
+                        phi_integration(h_Phi_ref , h_Pt2_ref , Pt2_bin);
                     }// End Pt2 loop
 
-                    h_Pt2->Write(get_acccorr_Pt2_histo_name(targ,Q2_bin,Nu_bin,Zh_bin).c_str());
-                    h_Pt2->Reset();
+                    h_Pt2_pdat->Write(get_acccorr_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
+                    h_Pt2_ref->Write(get_thrown_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
+
+                    h_Pt2_pdat->Reset(get_acccorr_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
+                    h_Pt2_ref->Reset(get_thrown_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
                 }// End Zh loop
             }// End Nu loop
         }// End Q2 loop
@@ -49,8 +57,10 @@ int main(int argc , char *argv[])
     
     delete fin;
     delete fout;
-    delete h_Phi;
-    delete h_Pt2;
+    delete h_Phi_pdat;
+    delete h_Phi_ref;
+    delete h_Pt2_pdat;
+    delete h_Pt2_ref;
 
     std::cout<<"Finished phipq integration."<<std::endl;
 

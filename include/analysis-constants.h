@@ -1,3 +1,6 @@
+#ifndef ANALYSIS_CONSTANTS_H
+#define ANALYSIS_CONSTANTS_H
+
 #include "TCut.h"
 
 // BINNING
@@ -19,9 +22,14 @@ const float Phi_min   = -180.;
 const float Phi_max   =  180.;
 const float delta_Phi = (Phi_max-Phi_min)/N_Phi;
 
+// Integrations of ZH starts at Zh = 0.2
+const int Zh_cutoff = 2;
+
 // Additional cuts
 // Set to Xf>-10 to select all fragmentation regions 
 // Set to Xf>0 to select target fragmentation region
 TCut dat_add_cut[3] = { "Xf>-10" , "TMath::Abs(YC)<1.4" , "TMath::Abs(deltaZ)<3." };
 TCut rec_add_cut[3] = { "Xf>-10" , "TMath::Abs(YC)<1.4" , "TMath::Abs(deltaZ)<3." };
 TCut thr_add_cut[2] = { "Xf>-10" , "TMath::Abs(deltaZ)<3." };
+
+#endif

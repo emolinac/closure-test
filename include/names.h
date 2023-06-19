@@ -8,7 +8,7 @@ std::string dat_dir = "/work/emolina/";
 std::string sim_dir = "/work/emolina/";
 
 std::string input_dir  = "../input-files/";
-std::string result_dir = "../output-files-acc/";
+std::string results_dir = "../output-files-acc/";
 
 std::string file_name_phi      = "phi-distributions.root";
 std::string file_name_pt2      = "pt2-distributions.root";
