@@ -56,9 +56,8 @@ int main(int argc, char* argv[])
     TCut Q2_cut = Form("Q2>%f&&Q2<%f",Q2_min,Q2_max);
     TCut Nu_cut = Form("Nu>%f&&Nu<%f",Nu_min,Nu_max);
     TCut Zh_cut = Form("Zh>%f&&Zh<%f",Zh_min,Zh_max);
-    TCut VZ_cut = Form("VC_TM==%i",vertex_cut_value);
     
-    TCut cuts_dat = Q2_cut&&Nu_cut&&Zh_cut&&VZ_cut;
+    TCut cuts_dat = Q2_cut&&Nu_cut&&Zh_cut;
     TCut cuts_ref = Q2_cut&&Nu_cut&&Zh_cut;
     TCut cuts_thr = Q2_cut&&Nu_cut&&Zh_cut;
     TCut cuts_rec = Q2_cut&&Nu_cut&&Zh_cut;
@@ -76,9 +75,9 @@ int main(int argc, char* argv[])
     for(int i = 0 ; i < sizeof(rec_add_cut)/sizeof(TCut) ; i++) cuts_rec += rec_add_cut[i];
 
     // Check cuts in lists
-    std::cout<<"data and ref list cuts   : "<<cuts_dat<<std::endl;
-    std::cout<<"thrown list cuts : "<<cuts_thr<<std::endl;
-    std::cout<<"recons list cuts : "<<cuts_rec<<std::endl;
+    std::cout<<"data list cuts           : "<<cuts_dat<<std::endl;
+    std::cout<<"thrown and ref list cuts : "<<cuts_thr<<std::endl;
+    std::cout<<"recons list cuts         : "<<cuts_rec<<std::endl;
 
     // Set TEventLists to make everything faster
     ntuple_thr->Draw(">>list_thr",cuts_thr);
