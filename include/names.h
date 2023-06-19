@@ -10,12 +10,15 @@ std::string sim_dir = "/work/emolina/";
 std::string input_dir   = "../input-files/";
 std::string results_dir = "../output-files/";
 
-std::string file_name_phi      = "phi-distributions.root";
-std::string file_name_pt2      = "pt2-distributions.root";
-std::string file_name_pt2_bg   = "pt2-distributions-bgtreated.root";
-std::string file_name_pt2_fits = "pt2-distributions-fits.root";
-std::string file_name_meanpt2  = "results-meanpt2.root";
-std::string file_name_broad    = "results-broadening.root";
+std::string file_name_phi_nominal = "phi-distributions-nominal.root";
+std::string file_name_pt2_nominal = "pt2-distributions-nominal.root";
+std::string file_name_weights     = "weights.root";
+std::string file_name_phi         = "phi-distributions.root";
+std::string file_name_pt2         = "pt2-distributions.root";
+std::string file_name_pt2_bg      = "pt2-distributions-bgtreated.root";
+std::string file_name_pt2_fits    = "pt2-distributions-fits.root";
+std::string file_name_meanpt2     = "results-meanpt2.root";
+std::string file_name_broad       = "results-broadening.root";
 
 // Extensions
 std::string dat_ext = "_data_Npion.root";

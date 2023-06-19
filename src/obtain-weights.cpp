@@ -15,7 +15,7 @@ int main(int argc , char *argv[])
     if(!check_file_existence(input_dir, file_name_phi)) return 1;
     TFile* fin  = new TFile((input_dir+file_name_phi).c_str());
     
-    TFile* fout = new TFile((results_dir+file_name_pt2).c_str(),"RECREATE");
+    TFile* fout = new TFile((results_dir+file_name_weights).c_str(),"RECREATE");
     gROOT->cd();
 
     // Integrate through all bins and targets
