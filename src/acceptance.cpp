@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     if(!f->IsOpen()){std::cout<<"ERROR! Files were not opened!"<<std::endl; return 1;}
 
     // Create results folder
-    TFile* fresult = new TFile(get_cltacc_file_name(sim_target_index).c_str(),"RECREATE");
+    TFile* fresult = new TFile(get_cltacc_file_name(sim_target_index, Q2_bin, Nu_bin, Zh_bin).c_str(),"RECREATE");
     gROOT->cd();
 
     // Obtain the tuples
