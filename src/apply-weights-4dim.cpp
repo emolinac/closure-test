@@ -46,14 +46,16 @@ int main(int argc, char* argv[])
                         // Apply weight
                         for(int bin = 1 ; bin <= h_Pt2_dat->GetNbinsX() ; bin++)
                         {
-                            double dat_bin_center = h_Pt2_dat->GetBinCenter(bin);
-                            int bin_of_weight = h_Pt2_weights->GetBinContent(dat_bin_center);
+                            // Obtain weight according to value of bin content of acceptance-corrected Pt2
+                            double weight = h_Pt2_weights->GetBinContent(h_Pt2_weights->GetBin(h_Pt2_dat->GetBinCenter(bin)));
+
+                            // Replace the content of the bin with the modification given by the weight
+                            double content = h_Pt2_dat->GetBinContent(bin);
+                            h_Pt2_dat->SetBinContent(bin, content/weight);
                         }
 
-                        h_Pt2_dat->Divide(h_Pt2_weights);
                         h_Pt2_dat->Write(get_acccorr_cleaninterpolated_Pt2_histo_name(vertex_cut_value, dat_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
                         h_Pt2_dat->Reset();
-
                    }// End Zh loop
                 }// End Nu loop
             }// End Q2 loop

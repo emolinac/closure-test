@@ -90,17 +90,17 @@ std::string get_weights_name(int sim_target_index, int Q2_bin, int Nu_bin, int Z
 
 std::string get_acccorr_Pt2_histo_name(int vertex_cut_value, int dat_target_index, int Q2_bin, int Nu_bin, int Zh_bin)
 {
-    return histo_acc+"Pt2_"+targets[target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin);
+    return histo_acc+"Pt2_"+targets[vertex_cut_value-1][dat_target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin);
 }
 
 std::string get_acccorr_clean_Pt2_histo_name(int vertex_cut_value, int dat_target_index, int Q2_bin, int Nu_bin, int Zh_bin)
 {
-    return histo_acc+"Pt2_"+targets[target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin)+"_clean";
+    return histo_acc+"Pt2_"+targets[vertex_cut_value-1][dat_target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin)+"_clean";
 }
 
 std::string get_acccorr_cleaninterpolated_Pt2_histo_name(int vertex_cut_value, int dat_target_index, int Q2_bin, int Nu_bin, int Zh_bin)
 {
-    return histo_acc+"Pt2_"+targets[target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin)+"_clean_interpolated";
+    return histo_acc+"Pt2_"+targets[vertex_cut_value-1][dat_target_index]+"_"+std::to_string(Q2_bin)+std::to_string(Nu_bin)+std::to_string(Zh_bin)+"_clean_interpolated";
 }
 
 #endif
