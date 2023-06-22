@@ -73,12 +73,12 @@ int main(int argc , char *argv[])
     fin->Close(); 
     fout->Close();
     
-    delete h_Phi_pdat;
-    delete h_Phi_ref;
-    delete h_Phi_weights;
-    delete h_Pt2_pdat;
-    delete h_Pt2_ref;
-    delete h_Pt2_weights;
+    //delete h_Phi_pdat;
+    //delete h_Phi_ref;
+    //delete h_Phi_weights;
+    //delete h_Pt2_pdat;
+    //delete h_Pt2_ref;
+    //delete h_Pt2_weights;
 
     std::cout<<"Finished phipq integration."<<std::endl;
 
