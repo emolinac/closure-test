@@ -42,10 +42,10 @@ int main(int argc , char *argv[])
                         h_Phi_ref  = (TH1F*) fin->Get(get_thrown_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
                         if(h_Phi_pdat==NULL||h_Phi_ref==NULL) continue;
 
-                        //Obtain 5dim weight
-                        h_Phi_weights->Divide(h_Phi_pdat,h_Phi_ref,1,1);
-                        h_Phi_weights->Write(get_weights_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
-                        h_Phi_weights->Reset();
+                        ////Obtain 5dim weight
+                        //h_Phi_weights->Divide(h_Phi_pdat,h_Phi_ref,1,1);
+                        //h_Phi_weights->Write(get_weights_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin,Pt2_bin).c_str());
+                        //h_Phi_weights->Reset();
 
                         // Proceed by integrating
                         phi_integration(h_Phi_pdat, h_Pt2_pdat, Pt2_bin);
