@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
     TFile* fin_clt     = new TFile((results_dir+file_name_weights  ).c_str());
 
     // Open results files
-    TFile* fout = new TFile((results_dir+"ct_"+file_name_phi).c_str(),"RECREATE");
+    TFile* fout = new TFile((results_dir+"ct_"+file_name_pt2).c_str(),"RECREATE");
     gROOT->cd();
 
     // Integrate through all bins and targets
@@ -71,7 +71,6 @@ int main(int argc, char* argv[])
     delete fin_nominal;
     delete fin_clt;
     delete fout;
-    delete h_Pt2_dat;
-    delete h_Pt2_weights;
-    delete h_Pt2_dat;
+
+    return 1;
 }
