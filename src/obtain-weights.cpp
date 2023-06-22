@@ -60,7 +60,7 @@ int main(int argc , char *argv[])
                     h_Pt2_weights->Write(get_weights_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
                     h_Pt2_weights->Reset();
                     gROOT->cd();
-                    
+
                     h_Pt2_pdat->Reset();
                     h_Pt2_ref->Reset();
                 }// End Zh loop
@@ -75,9 +75,11 @@ int main(int argc , char *argv[])
     delete fout;
     delete h_Phi_pdat;
     delete h_Phi_ref;
+    delete h_Phi_weights;
     delete h_Pt2_pdat;
     delete h_Pt2_ref;
-
+    delete h_Pt2_weights;
+    
     std::cout<<"Finished phipq integration."<<std::endl;
 
     return 1;
