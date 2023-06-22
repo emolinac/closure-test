@@ -68,6 +68,8 @@ int main(int argc , char *argv[])
         }// End Q2 loop
     }// End Targets loop
     
+    std::cout<<"Finished loops"<<std::endl;
+    
     fin->Close(); 
     fout->Close();
     
@@ -79,7 +81,7 @@ int main(int argc , char *argv[])
     delete h_Pt2_pdat;
     delete h_Pt2_ref;
     delete h_Pt2_weights;
-    
+
     std::cout<<"Finished phipq integration."<<std::endl;
 
     return 1;
