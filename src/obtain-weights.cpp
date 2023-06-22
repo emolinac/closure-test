@@ -69,12 +69,10 @@ int main(int argc , char *argv[])
     }// End Targets loop
     
     std::cout<<"Finished loops"<<std::endl;
-    
+
     fin->Close(); 
     fout->Close();
     
-    delete fin;
-    delete fout;
     delete h_Phi_pdat;
     delete h_Phi_ref;
     delete h_Phi_weights;
