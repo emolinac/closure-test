@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 
                             // Replace the content of the bin with the modification given by the weight
                             double content = h_Pt2_dat->GetBinContent(bin);
-                            h_Pt2_dat->SetBinContent(bin, content/weight);
+                            weight > 0 ? h_Pt2_dat->SetBinContent(bin, content/weight) : h_Pt2_dat->SetBinContent(bin, content);
                         }
 
                         h_Pt2_dat->Write(get_acccorr_cleaninterpolated_Pt2_histo_name(vertex_cut_value, dat_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
