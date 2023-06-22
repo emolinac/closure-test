@@ -27,7 +27,6 @@ int main(int argc , char *argv[])
     TH1F* h_Pt2_ref     = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
     TH1F* h_Pt2_weights = new TH1F("","",N_Pt2,Pt2_min,Pt2_max);
 
-    fout->cd();
     for(int sim_target_index = 0 ; sim_target_index < sizeof(sim_targets)/sizeof(std::string) ; sim_target_index++)
     {
         for(int Q2_bin = 0 ; Q2_bin < N_Q2 ; Q2_bin++)
@@ -52,6 +51,7 @@ int main(int argc , char *argv[])
                         phi_integration(h_Phi_ref , h_Pt2_ref , Pt2_bin);
                     }// End Pt2 loop
 
+                    fout->cd();
                     h_Pt2_pdat->Write(get_acccorr_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
                     h_Pt2_ref->Write(get_thrown_histo_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
 
@@ -59,7 +59,8 @@ int main(int argc , char *argv[])
                     h_Pt2_weights->Divide(h_Pt2_pdat, h_Pt2_ref,1,1);
                     h_Pt2_weights->Write(get_weights_name(sim_target_index,Q2_bin,Nu_bin,Zh_bin).c_str());
                     h_Pt2_weights->Reset();
-
+                    gROOT->cd();
+                    
                     h_Pt2_pdat->Reset();
                     h_Pt2_ref->Reset();
                 }// End Zh loop
