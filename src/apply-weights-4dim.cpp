@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
                         for(int bin = 1 ; bin <= h_Pt2_dat->GetNbinsX() ; bin++)
                         {
                             // Obtain weight according to value of bin content of acceptance-corrected Pt2
-                            double weight = h_Pt2_weights->GetBinContent(h_Pt2_weights->GetBin(h_Pt2_dat->GetBinCenter(bin)));
+                            double weight = h_Pt2_weights->GetBinContent(h_Pt2_weights->FindBin(h_Pt2_dat->GetBinCenter(bin)));
 
                             // Replace the content of the bin with the modification given by the weight
                             double content = h_Pt2_dat->GetBinContent(bin);
